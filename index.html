@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="./helper/clwd.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+<meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://www.youtube.com https://cdn-link.mmovie.site https://clwd-api.mmovie.site https://clwd-uat-api.mmovie.site https://*.google.com https://*.googleapis.com https://*.gstatic.com https://static.cloudflareinsights.com;
+    style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://cdn-link.mmovie.site;
+    font-src 'self' data: https://cdn-link.mmovie.site https://fonts.gstatic.com blob:;
+    img-src 'self' data: https: http: blob:;
+    connect-src 'self' https://script.google.com https://script.googleusercontent.com https://cdn.jsdelivr.net https://cdn-link.mmovie.site https://clwd-api.mmovie.site https://clwd-uat-api.mmovie.site https://uat-api.mmovie.site ws: wss:;
+    frame-src https://www.youtube.com https://www.youtube-nocookie.com https://accounts.google.com https://fembed.co https://*.fembed.co https://vidoza.net https://*.vidoza.net https://www.fembed.co;
+    media-src 'self' blob:;
+    base-uri 'self';
+    form-action 'self';
+">
+  
+  <title>Come Later, When It's Dark</title>
+  
+  <!-- Custom CDN Bootstrap -->
+  <link href="https://cdn-link.mmovie.site/helper/BS-5.3.8/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Font Awesome (CDN) -->
+  <link rel="stylesheet" href="https://cdn-link.mmovie.site/helper/fontawsome-7.2.0/css/all.min.css">
+  
+  <link rel="canonical" href="https://www.mmovie.site<?php echo $_SERVER['REQUEST_URI']; ?>">
+  
+  <!-- Local main CSS -->
+  <link rel="stylesheet" href="./assets/main.css">
+  
+  <!-- Preconnect to API -->
+  <link rel="preconnect" href="https://clwd-api.mmovie.site/">
+  <link rel="dns-prefetch" href="https://clwd-api.mmovie.site/">
+</head>
+<body>
+
+  <!-- Background Animation Elements -->
+  <ul class="bg-bubbles">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+
+  <!-- ==================== MAIN PAGE ==================== -->
+  <div id="mainPage" style="display: none;">
+    
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-custom">
+      <div class="container">
+        <a class="navbar-brand fw-bold mk-nav" href="#">
+          <img src="./helper/clwd.png" width="60px" height="60px" alt="M-Movie Logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          
+          <!-- Search Bar and Filter Container -->
+          <div class="d-flex ms-auto me-3 align-items-center search-filter-container">
+            
+            <!-- Trending Filter Button -->
+            <button class="btn btn-hot-filter me-3" onclick="toggleHotFilter()" id="hotFilterBtnUser">
+              <i class="fa-solid fa-fire-flame-curved"></i>Trending
+            </button>
+            
+            <!-- Content Type Filter Dropdown -->
+            <div class="dropdown me-3">
+              <button class="btn btn-outline-light dropdown-toggle content-type-filter-btn" type="button" id="contentTypeDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-film me-1"></i>All Content
+              </button>
+              <ul class="dropdown-menu content-type-dropdown-menu" id="contentTypeDropdownMenu">
+                <li><a class="dropdown-item content-type-filter-item active" href="#" data-type="all">All Content</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item content-type-filter-item" href="#" data-type="censored">
+                  <i class="fas fa-eye-slash text-primary me-2"></i>Censored
+                  <span class="content-type-count" id="censoredCount">0</span>
+                </a></li>
+                <li><a class="dropdown-item content-type-filter-item" href="#" data-type="uncensored">
+                  <i class="fas fa-eye text-success me-2"></i>Uncensored
+                  <span class="content-type-count" id="uncensoredCount">0</span>
+                </a></li>
+                <li><a class="dropdown-item content-type-filter-item" href="#" data-type="Straight">
+                  <i class="fas fa-venus-mars text-warning me-2"></i>Straight
+                  <span class="content-type-count" id="straightCount">0</span>
+                </a></li>
+                <li><a class="dropdown-item content-type-filter-item" href="#" data-type="LGBT">
+                  <i class="fas fa-rainbow text-info me-2"></i>LGBT
+                  <span class="content-type-count" id="lgbtCount">0</span>
+                </a></li>
+              </ul>
+            </div>
+            
+            <!-- Genre Filter Dropdown -->
+            <div class="dropdown me-3">
+              <button class="btn btn-outline-light dropdown-toggle genre-filter-btn" type="button" id="genreDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-tags me-1"></i>All Genres
+              </button>
+              <ul class="dropdown-menu genre-dropdown-menu" id="genreDropdownMenu">
+                <li><a class="dropdown-item genre-filter-item active" href="#" data-genre="all">All Genres</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <div class="loading-genres">
+                  <div class="spinner-border spinner-border-sm text-primary me-2" role="status"></div>
+                  <span>Loading genres...</span>
+                </div>
+              </ul>
+            </div>
+            
+            <!-- Search Bar -->
+            <div class="d-flex">
+              <div class="input-group search-container">
+                <input type="text" id="searchInput" class="form-control search-input" placeholder="Search...">
+                <button class="btn btn-outline-light search-btn" onclick="performSearch()">
+                  <i class="fas fa-search"></i>
+                </button>
+                <button class="btn btn-outline-light search-clear" onclick="clearSearch()" style="display: none;">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <ul class="navbar-nav">
+            <li class="nav-item"></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container my-5">
+      
+      <!-- Featured Trending Section -->
+      <div id="hotFeaturedSection" class="mb-5" style="display: none;">
+        <div class="section-header mb-4">
+          <h2 class="text-white"><i class="fa-solid fa-fire-flame-curved"></i>Trending</h2>
+          <p class="text-white-50">လတ်တလော လူကြည့်များသည်များ</p>
+        </div>
+        
+        <div class="row g-4 mb-5" id="hotCensoredRow">
+          <h4 class="text-white mb-3"><i class="fas fa-eye-slash text-primary me-2"></i>Trending Censored</h4>
+          <div id="hotCensoredList" class="row g-4">
+            <div class="text-center py-4">
+              <div class="spinner-border text-light" role="status"></div>
+              <p class="text-white mt-2">Loading Trending content...</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="row g-4 mb-5" id="hotUncensoredRow" style="display: none;">
+          <h4 class="text-white mb-3"><i class="fas fa-eye text-success me-2"></i>Trending Uncensored</h4>
+          <div id="hotUncensoredList" class="row g-4"></div>
+        </div>
+        
+        <div class="row g-4 mb-5" id="hotStraightRow" style="display: none;">
+          <h4 class="text-white mb-3"><i class="fas fa-venus-mars text-warning me-2"></i>Trending Straight</h4>
+          <div id="hotStraightList" class="row g-4"></div>
+        </div>
+        
+        <div class="row g-4 mb-5" id="hotLGBTRow" style="display: none;">
+          <h4 class="text-white mb-3"><i class="fas fa-rainbow text-info me-2"></i>Trending LGBT</h4>
+          <div id="hotLGBTList" class="row g-4"></div>
+        </div>
+      </div>
+      
+      <!-- Content Type Sections -->
+      <div id="contentTypeSections">
+        
+        <!-- Censored Section -->
+        <div class="content-type-section mb-5" id="censoredSection">
+          <div class="section-header mb-4">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <h2 class="text-white"><i class="fas fa-eye-slash text-primary me-2"></i>Censored</h2>
+                <p class="text-white-50">Censored content</p>
+              </div>
+            </div>
+          </div>
+          <div id="censoredList" class="row g-4">
+            <div class="text-center py-4">
+              <div class="spinner-border text-light" role="status"></div>
+              <p class="text-white mt-2">Loading content...</p>
+            </div>
+          </div>
+          <div class="text-center mt-4" id="censoredPagination" style="display: none;">
+            <button class="btn btn-primary btn-custom btn-primary-custom" onclick="loadMore('censored')">
+              <i class="fas fa-plus me-2"></i>Load More
+            </button>
+          </div>
+        </div>
+        
+        <!-- Uncensored Section -->
+        <div class="content-type-section mb-5" id="uncensoredSection" style="display: none;">
+          <div class="section-header mb-4">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <h2 class="text-white"><i class="fas fa-eye text-success me-2"></i>Uncensored</h2>
+                <p class="text-white-50">Uncensored content</p>
+              </div>
+            </div>
+          </div>
+          <div id="uncensoredList" class="row g-4"></div>
+          <div class="text-center mt-4" id="uncensoredPagination" style="display: none;">
+            <button class="btn btn-success btn-custom btn-success-custom" onclick="loadMore('uncensored')">
+              <i class="fas fa-plus me-2"></i>Load More
+            </button>
+          </div>
+        </div>
+        
+        <!-- Straight Section -->
+        <div class="content-type-section mb-5" id="straightSection" style="display: none;">
+          <div class="section-header mb-4">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <h2 class="text-white"><i class="fas fa-venus-mars text-warning me-2"></i>Straight</h2>
+                <p class="text-white-50">Straight content</p>
+              </div>
+            </div>
+          </div>
+          <div id="straightList" class="row g-4"></div>
+          <div class="text-center mt-4" id="straightPagination" style="display: none;">
+            <button class="btn btn-warning btn-custom btn-warning-custom" onclick="loadMore('straight')">
+              <i class="fas fa-plus me-2"></i>Load More
+            </button>
+          </div>
+        </div>
+        
+        <!-- LGBT Section -->
+        <div class="content-type-section mb-5" id="lgbtSection" style="display: none;">
+          <div class="section-header mb-4">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <h2 class="text-white"><i class="fas fa-rainbow text-info me-2"></i>LGBT</h2>
+                <p class="text-white-50">LGBT content</p>
+              </div>
+            </div>
+          </div>
+          <div id="lgbtList" class="row g-4"></div>
+          <div class="text-center mt-4" id="lgbtPagination" style="display: none;">
+            <button class="btn btn-info btn-custom btn-info-custom" onclick="loadMore('lgbt')">
+              <i class="fas fa-plus me-2"></i>Load More
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Active Filters Indicator -->
+      <div id="activeFilters" class="mb-4" style="display: none;">
+        <div class="alert alert-info d-flex justify-content-between align-items-center">
+          <div><span id="activeFiltersText"></span></div>
+          <div>
+            <button class="btn btn-sm btn-outline-dark me-2" onclick="clearHotFilter()" id="clearHotFilterBtn" style="display: none;">
+              <i class="fas fa-times me-1"></i>Clear Trending Filter
+            </button>
+            <button class="btn btn-sm btn-outline-dark me-2" onclick="clearContentTypeFilter()" id="clearContentTypeFilterBtn" style="display: none;">
+              <i class="fas fa-times me-1"></i>Clear Content Type
+            </button>
+            <button class="btn btn-sm btn-outline-dark me-2" onclick="clearGenreFilter()" id="clearGenreFilterBtn" style="display: none;">
+              <i class="fas fa-times me-1"></i>Clear Genre
+            </button>
+            <button class="btn btn-sm btn-outline-dark" onclick="clearAllFilters()">
+              <i class="fas fa-times me-1"></i>Clear All
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Search Results Indicator -->
+      <div id="searchResults" class="mb-4" style="display: none;">
+        <div class="alert alert-info d-flex justify-content-between align-items-center">
+          <span id="searchResultsText"></span>
+          <button class="btn btn-sm btn-outline-dark" onclick="clearSearch()">
+            <i class="fas fa-times me-1"></i>Clear Search
+          </button>
+        </div>
+      </div>
+      
+      <!-- All Posts Grid (for filtered view) -->
+      <div id="filteredView" class="mb-5" style="display: none;">
+        <div class="section-header mb-4">
+          <h2 class="text-white" id="filteredViewTitle">All Posts</h2>
+        </div>
+        <div id="postList" class="row g-4">
+          <div class="loading-spinner">
+            <div class="spinner"></div>
+          </div>
+        </div>
+        <nav id="pagination" class="mt-5 d-flex justify-content-center" style="display: none;">
+          <ul class="pagination"></ul>
+        </nav>
+      </div>
+      
+      <!-- No Content Message -->
+      <div id="noContentMessage" class="text-center py-5" style="display: none;">
+        <i class="fas fa-inbox fa-4x text-white-50 mb-3"></i>
+        <h3 class="text-white">No content available</h3>
+        <p class="text-white-50">Check back later for new content.</p>
+        <button class="btn btn-primary btn-custom btn-primary-custom" onclick="loadPosts()">
+          <i class="fas fa-redo me-2"></i>Refresh
+        </button>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-white py-4 mt-5" style="background: rgba(0,0,0,0.2);">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <img src="./helper/clwd.png" width="60px" height="60px" alt="clwd logo">
+            <p>CLWD တွင် 18+ဇာတ်ကားကောင်းများကို လာရောက်ကြည့်ရှု့လိုက်ပါ။</p>
+            <div class="social-links">
+              <a href="https://www.facebook.com/clwd.mm" class="text-white me-3" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+              <a href="https://clwd.mmovie.site" class="text-white" target="_blank" rel="noopener noreferrer"><i class="fas fa-globe"></i></a>
+              <a href="./helper/policy.html" class="text-white me-3 version_control" style="text-decoration: none;margin-left: 10px;" target="_blank" rel="noopener noreferrer">privacy policy</a>
+            </div>
+          </div>
+          <div class="col-md-6 text-md-end">
+            <p>Made with ❤️ by KernelLab &copy; 2025-2026 CLWD All rights reserved. <br></p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ==================== SINGLE POST PAGE ==================== -->
+  <div id="singlePostPage" style="display: none;">
+    <div class="container my-4">
+      <div class="single-post-container">
+        
+        <!-- Single Post Header -->
+        <div class="single-post-header">
+          <h1 id="singlePostTitle"></h1>
+          <p class="mb-0" id="singlePostDate"></p>
+        </div>
+        
+        <!-- Single Post Content -->
+        <div class="single-post-content">
+          
+          <!-- Post Image -->
+          <img id="singlePostImage" class="single-post-image" alt="Post Image">
+          
+          <!-- ===== VIDEO PLAYER SECTION ===== -->
+          <div id="videoPlayerContainer" class="video-player-container mb-4" style="display: none;">
+            <div class="video-wrapper">
+              <div id="videoPlayer" class="video-player"></div>
+            </div>
+            <div class="video-controls">
+              <button class="btn btn-sm btn-outline-danger" onclick="closeVideoPlayer()">
+                <i class="fas fa-times me-1"></i>Close Video
+              </button>
+            </div>
+          </div>
+          <!-- ===== END VIDEO PLAYER ===== -->
+          
+          <!-- Trailer Container -->
+          <div id="trailerContainer" class="trailer-container" style="display: none;">
+            <div class="trailer-header">
+              <h3><i class="fas fa-play-circle me-2"></i>Movie Trailer</h3>
+              <button class="btn btn-sm btn-outline-light close-trailer-btn" onclick="closeTrailer()">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+            <div class="trailer-video-wrapper">
+              <div id="trailerVideo"></div>
+            </div>
+          </div>
+          
+          <!-- View Count Container -->
+          <div id="viewCountContainer" class="view-count-container mb-4" style="display: none;"></div>
+          
+          <!-- HOT Badge -->
+          <div id="hotBadgeContainer" class="hot-badge-container mb-4" style="display: none;">
+            <span class="badge bg-danger animate-pulse-hot">
+              <i class="fa-solid fa-fire-flame-curved"></i>Trending MOVIE
+            </span>
+          </div>
+          
+          <!-- Content Type Badge -->
+          <div id="contentTypeBadgeContainer" class="content-type-badge-container mb-4" style="display: none;">
+            <span class="badge" id="contentTypeBadge"></span>
+          </div>
+          
+          <!-- Genres Display -->
+          <div id="genresContainer" class="genres-container mb-4" style="display: none;">
+            <h4><i class="fas fa-tags me-2"></i>Genres</h4>
+            <div class="genres-tags" id="postGenres"></div>
+          </div>
+          
+          <!-- Rating Display -->
+          <div id="ratingContainer" class="rating-container mb-4" style="display: none;">
+            <h4><i class="fas fa-star me-2"></i>Rating (out of 10)</h4>
+            <div class="rating-display">
+              <div class="rating-stars" id="postRatingStars"></div>
+              <span class="rating-text" id="postRatingText"></span>
+            </div>
+          </div>
+          
+          <!-- Post Content -->
+          <div id="singlePostContent" style="line-height: 1.8; font-size: 1.1rem;"></div>
+          
+          <!-- Action Buttons -->
+          <div class="single-post-actions">
+            
+            <!-- Trailer Button -->
+            <button id="singlePostTrailerBtn" class="btn btn-warning btn-custom btn-warning-custom" onclick="showTrailer()" style="display: none;">
+              <i class="fas fa-play-circle me-2"></i>ဇာတ်လမ်း Trailer
+            </button>
+            
+            <!-- ===== UPDATED: Watch Now Button with Video Player ===== -->
+            <button id="singlePostWatchBtn" class="btn btn-success btn-custom btn-success-custom" onclick="openVideoPlayer()" style="display: none;">
+              <i class="fas fa-play me-2"></i>ဇာတ်ကားကြည့်ရန်
+            </button>
+            
+            <!-- Fallback: Direct Link (for non-embedable content) -->
+            <a id="singlePostWatch" class="btn btn-success btn-custom btn-success-custom" target="_blank" rel="noopener noreferrer" style="display: none;">
+              <i class="fas fa-external-link-alt me-2"></i>Open Link
+            </a>
+            
+            <!-- Share Button -->
+            <button class="btn btn-primary btn-custom btn-primary-custom" onclick="shareCurrentPost()">
+              <i class="fas fa-share-alt me-2"></i>Share Post
+            </button>
+            
+            <!-- Back to Main Page -->
+            <a href="?" class="btn btn-secondary btn-custom btn-secondary-custom">
+              <i class="fas fa-home me-2"></i>ပင်မစာမျက်နှာသို့ပြန်သွားရန်။
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Back to Top Button -->
+  <button id="backToTop" class="back-to-top">
+    <i class="fas fa-hand-point-up"></i>
+  </button>
+
+  <!-- Scripts -->
+  <script src="https://cdn-link.mmovie.site/helper/BS-5.3.8/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="./assets/main.js"></script>
+  
+  <!-- Ad Modal Container -->
+  <div id="adModalContainer"></div>
+</body>
+</html>

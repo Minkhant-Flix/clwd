@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Privacy Policy | ကိုယ်ရေးအချက်အလက်မူဝါဒ</title>
+    <!-- Google Fonts & Simple Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(145deg, #f8fafc 0%, #eef2f5 100%);
+            color: #0a0f1c;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        /* main card */
+        .policy-card {
+            background: rgba(255,255,255,0.96);
+            backdrop-filter: blur(0px);
+            border-radius: 2rem;
+            box-shadow: 0 25px 45px -12px rgba(0,0,0,0.2), 0 1px 2px rgba(0,0,0,0.05);
+            overflow: hidden;
+            transition: all 0.2s ease;
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+
+        /* header with dual lang toggle */
+        .lang-header {
+            padding: 1.8rem 2rem 1rem 2rem;
+            background: #ffffff;
+            border-bottom: 1px solid #e9edf2;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .title-section h1 {
+            font-size: 1.9rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1e2a3a, #0f172a);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.3px;
+        }
+
+        .title-section p {
+            font-size: 0.85rem;
+            color: #4a5b6e;
+            margin-top: 6px;
+        }
+
+        .lang-switch {
+            display: flex;
+            gap: 0.75rem;
+            background: #f1f5f9;
+            padding: 0.3rem;
+            border-radius: 60px;
+        }
+
+        .lang-btn {
+            border: none;
+            background: transparent;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: 0.2s;
+            font-family: inherit;
+            color: #334155;
+        }
+
+        .lang-btn.active {
+            background: #1e293b;
+            color: white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+
+        .lang-btn:not(.active):hover {
+            background: #e2e8f0;
+            color: #0f172a;
+        }
+
+        /* content area */
+        .content-pane {
+            padding: 2rem 2rem 2.5rem 2rem;
+        }
+
+        .lang-content {
+            display: none;
+            animation: fadeIn 0.25s ease-out;
+        }
+
+        .lang-content.active-lang {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+
+        /* typography */
+        .privacy-section {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #edf2f7;
+            padding-bottom: 1.5rem;
+        }
+
+        .privacy-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .privacy-section h2 {
+            font-size: 1.55rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #0f2b3d;
+        }
+
+        .privacy-section h2 i {
+            color: #2c7da0;
+            font-size: 1.4rem;
+        }
+
+        .privacy-section h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 1rem 0 0.5rem 0;
+            color: #1e4a6e;
+        }
+
+        .privacy-section p {
+            margin-bottom: 0.9rem;
+            font-size: 1rem;
+            color: #1f2a3e;
+        }
+
+        .highlight-badge {
+            background: #eef2ff;
+            border-left: 5px solid #3b82f6;
+            padding: 0.8rem 1.2rem;
+            border-radius: 1rem;
+            margin: 1rem 0;
+            font-weight: 500;
+        }
+
+        .telegram-note {
+            background: #eaf9ff;
+            border-radius: 1.2rem;
+            padding: 1rem 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 0.5rem;
+        }
+
+        .telegram-note i {
+            font-size: 1.8rem;
+            color: #0088cc;
+        }
+
+        .footer-note {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            font-size: 0.8rem;
+            text-align: center;
+            color: #5e6f8d;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        @media (max-width: 640px) {
+            .lang-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .content-pane {
+                padding: 1.5rem;
+            }
+            .privacy-section h2 {
+                font-size: 1.3rem;
+            }
+        }
+
+        button, a {
+            transition: all 0.2s;
+        }
+        .movie-badge {
+            background: #fff6e5;
+            border-radius: 16px;
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+            display: inline-block;
+            margin: 0.3rem 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="policy-card">
+        <center><img src="./circle.webp" width="80px" height="80px" style="margin-top: 20px;"></center>
+        <div class="lang-header">
+            <div class="title-section">
+                <h1><i class="fas fa-shield-alt" style="color: #2c7da0;"></i> privacy. / ကိုယ်ရေးလုံခြုံမှု</h1>
+                <p>Last updated / နောက်ဆုံးပြင်ဆင်ချက် - May 2026</p>
+            </div>
+            <div class="lang-switch">
+                <button class="lang-btn active" id="btn-myanmar">မြန်မာ (Default)</button>
+                <button class="lang-btn" id="btn-english">English</button>
+            </div>
+        </div>
+
+        <div class="content-pane">
+            <!-- MYANMAR LANGUAGE CONTENT (default active) -->
+            <div id="myanmar-content" class="lang-content active-lang">
+                <div class="privacy-section">
+                    <h2><i class="fas fa-database"></i> အသုံးပြုသူဒေတာ & Cookie မူဝါဒ</h2>
+                    <p>ဤဝဘ်ဆိုဒ်သည် <strong>အသုံးပြုသူ၏ ကိုယ်ရေးအချက်အလက်များ၊ လိပ်စာ၊ အီးမေးလ်၊ ဖုန်းနံပါတ်၊ ဘဏ်အချက်အလက် သို့မဟုတ် ခြေရာခံနိုင်သော ဒေတာ လုံးဝကို စုဆောင်းခြင်း၊ သိမ်းဆည်းခြင်း သို့မဟုတ် ရယူသုံးစွဲခြင်း မပြုလုပ်ပါ။</strong></p>
+                    <div class="highlight-badge">
+                        <i class="fas fa-cookie-bite" style="margin-right: 8px;"></i> 
+                        <strong>Cookie အသုံးပြုမှု :</strong> ကျွန်ုပ်တို့သည် သင့်စက်တွင် tracking cookies, third-party analytics cookies, advertising cookies များ လုံးဝသိမ်းဆည်းခြင်း မရှိပါ။ အနည်းဆုံး လုပ်ဆောင်ချက်အတွက် လိုအပ်သော session data ပင် မသိမ်းဆည်းပါ။ ဆိုလိုသည်မှာ သင့်အချက်လက်များအား မည်သည့်အကြောင်းကြောင်းနှင့်မှ ရယူမည်မဟုတ်ပါ။
+                    </div>
+                    <p>✔️ သင်၏ဘရောက်ဆာမှတစ်ဆင့် ကျွန်ုပ်တို့ထံသို့ မည်သည့် personal data မျှ မရောက်ရှိပါ။<br>
+                    ✔️ ကျွန်ုပ်တို့သည် သင်၏လှုပ်ရှားမှုကို ခြေရာခံခြင်း၊ log သိမ်းဆည်းခြင်း သို့မဟုတ် ပရိုဖိုင်ဖန်တီးခြင်းများ လုံးဝမလုပ်ဆောင်ပါ။<br>
+                    ✔️ ဤဆိုဒ်သည် “No-Track” မူဝါဒကို ခံယူထားပြီး ကြော်ငြာ သို့မဟုတ် စျေးကွက်ရှာဖွေရေးအတွက် အချက်အလက်မယူပါ။</p>
+                </div>
+
+                <div class="privacy-section">
+                    <h2><i class="fab fa-telegram"></i> ရုပ်ရှင်ဇာတ်ကားများကြည့်ရှုခြင်း (Telegram Channel)</h2>
+                    <p>ကျွန်ုပ်တို့သည် လူကြိုက်များသော ဇာတ်ကားကောင်းများကို အဆင့်ဆင့် join လုပ်စရာမလိုဘဲ တိုက်ရိုက်ကြည့်ရှုနိုင်ရန် စီစဉ်ပေးထားပါသည်။</p>
+                    <div class="telegram-note">
+                        <i class="fab fa-telegram-plane"></i>
+                        <span><strong>Telegram လင့်ခ် :</strong> သင် မည်သည့် အုပ်စု သို့မဟုတ် Channel သို့မှ ကြိုတင် join ဝင်ရန်မလိုပါ။ ဝဘ်ဆိုက်မှတဆင့် သင်ကြည့်လိုရာဇာတ်ကားများရှိသည်ဆိုမှသာ join ပြီးဝင်ရောက်ကြည့်ရှု့နိုင်ပါသည်။ <i class="fas fa-check-circle" style="color:#20b2aa;"></i> အဆင့်ဆင့် Channel Join ရခြင်းများမရှိပါ။</span>
+                    </div>
+                    <p>📽️ ရည်ရွယ်ချက်မှာ အရည်အသွေးကောင်း ရုပ်ရှင်များကို ရှာဖွေတွေ့ရှိပြီး အနှောက်အယှက်ကင်းစွာ ကြည့်ရှုနိုင်ရန် ဖြစ်ပါသည်။ Telegram channel များမှ အကြောင်းအရာများကို လွယ်ကူစွာ access ရနိုင်စေရန် ဒီဇိုင်းထုတ်ထားပါတယ်။</p>
+                </div>
+
+                <div class="privacy-section">
+                    <h2><i class="fas fa-search"></i> ဤဝဘ်ဆိုဒ်ပြုလုပ်ရခြင်း ရည်ရွယ်ချက်</h2>
+                    <p>ကျွန်ုပ်တို့သည် ကျွန်ုပ်တို့ကိုယ်တိုင် ကြည့်ရှုဖူးသော၊ နှစ်ခြိုက်သော ဇာတ်ကားများစာရင်းကို ပြုစုထားပြီး သင်လည်း ထိုဇာတ်ကားများရှိမရှိ (သို့) အလားတူဇာတ်ကားများကို ရှာဖွေနိုင်ရန်အတွက် ဖြစ်ပါသည်။</p>
+                    <div class="movie-badge">
+                        <i class="fas fa-film"></i> &nbsp; <strong>ရှာဖွေရလွယ်ကူခြင်း -</strong> ကိုယ်တိုင်ကြည့်ဖူးသော ဇာတ်ကားများ ဒေတာဘေ့စ် သို့မဟုတ် စာရင်းများတွင် ပါဝင်မှု ရှိ/မရှိ သိရှိနိုင်ပါသည်။ အချိန်ကုန်သက်သာစေပြီး အကြောင်းအရာများကို အလွယ်တကူ ရှာဖွေနိုင်ရန် ရည်ရွယ်ပါသည်။
+                    </div>
+                    <p>🔍 **ဒီ website သည် သုံးစွဲသူများအတွက် Personal data သိမ်းဆည်းခြင်းမရှိဘဲ၊ ရုပ်ရှင်ရှာဖွေရေးကိရိယာအဖြစ်သာ ဆောင်ရွက်ပါသည်။** သင်သည် ကျွန်ုပ်တို့၏ အကြောင်းအရာများကို အခမဲ့ဝင်ရောက်ကြည့်ရှုနိုင်ပြီး Telegram channel သို့ join ရန် အတင်းအကြပ်စေခိုင်းထားခြင်း မရှိပါ။</p>
+                </div>
+
+                <div class="privacy-section">
+                    <h2><i class="fas fa-gavel"></i> သင်၏သဘောတူညီချက် & ပြင်ဆင်ချက်များ</h2>
+                    <p>ဝဘ်ဆိုဒ်ကို ဆက်လက်အသုံးပြုခြင်းဖြင့် ဤ Privacy Policy ပါ အချက်များကို လက်ခံသည်ဟု ယူဆပါသည်။ ကျွန်ုပ်တို့သည် မည်သည့် အသုံးပြုသူဒေတာကိုမျှ မကိုင်တွယ်သောကြောင့် သင့်အနေဖြင့် ဘေးကင်းလုံခြုံပါသည်။ အနာဂတ်တွင် ဤမူဝါဒအား ပြောင်းလဲပါက ဤစာမျက်နှာတွင် ချက်ချင်း ထုတ်ပြန်ပါမည်။ သို့သော် ‘ဒေတာမသိမ်းဆည်းခြင်း’ မူကို ပြောင်းလဲမည်မဟုတ်ပါ။</p>
+                    <a href='https://mmovie.site/' target="_blank">ပင်မစာမျက်နှာသို့ပြန်သွားရန်</a>
+                </div>
+                <div class="footer-note">
+                    <i class="far fa-clock"></i> နောက်ဆုံးမွမ်းမံချက် : 2026-05-10 &nbsp;|&nbsp; 
+                    <i class="fas fa-lock"></i> လုံးဝ data collection မရှိ၊ cookie မရှိ၊ ကိုယ်ရေးအချက်အလက် ဘေးကင်း
+                </div>
+            </div>
+
+            <!-- ENGLISH LANGUAGE CONTENT -->
+            <div id="english-content" class="lang-content">
+                <div class="privacy-section">
+                    <h2><i class="fas fa-database"></i> User Information & Cookie Policy</h2>
+                    <p><strong>This website does NOT collect, store, or access any personal user information</strong> including IP addresses, emails, names, payment details, or any identifiable data.</p>
+                    <div class="highlight-badge">
+                        <i class="fas fa-cookie-bite" style="margin-right: 8px;"></i> 
+                        <strong>Cookie Usage :</strong> We do NOT store any tracking cookies, third-party analytics, or advertising cookies. No session data is persisted. You remain completely anonymous while browsing.
+                    </div>
+                    <p>✔️ No personal data is ever transmitted to our servers.<br>
+                    ✔️ We do not log activity, track behavior, or create user profiles.<br>
+                    ✔️ This site follows a strict "No-Track" policy with zero data collection for ads or marketing.</p>
+                </div>
+
+                <div class="privacy-section">
+                    <h2><i class="fab fa-telegram"></i> Watching Great Movies via Telegram Channel</h2>
+                    <p>We provide seamless access to high-quality movies directly from a Telegram channel <strong>without requiring any steps to join or subscribe</strong> to the channel in advance.</p>
+                    <div class="telegram-note">
+                        <i class="fab fa-telegram-plane"></i>
+                        <span><strong>Telegram Integration :</strong> No need to join any group or channel. You can instantly access movie content via our web interface. No invitation layers, no forced subscriptions — just click and watch.</span>
+                    </div>
+                    <p>📽️ The goal is to allow you to discover and watch movies effortlessly. The Telegram channel is used as a media source, but we never require you to join, verify, or provide any personal information to access the content.</p>
+                </div>
+
+                <div class="privacy-section">
+                    <h2><i class="fas fa-search"></i> Purpose of This Website</h2>
+                    <p>This platform is built to help you <strong>search and verify whether specific movies (especially ones we have personally watched and enjoyed) are available</strong> in our reference list or catalog. It acts as a movie discovery tool.</p>
+                    <div class="movie-badge">
+                        <i class="fas fa-film"></i> &nbsp; <strong>Search Functionality :</strong> Easily find out if a movie you're curious about exists in our curated list. No login, no data retention, just search-based utility.
+                    </div>
+                    <p>🔍 The website never stores your search history or personal preferences. It is purely a reference tool for movie lovers.</p>
+                </div>
+
+                <div class="privacy-section">
+                    <h2><i class="fas fa-gavel"></i> Consent & Changes</h2>
+                    <p>By using this website, you consent to this Privacy Policy. Because we never collect any user data, your privacy is never at risk. If any future changes occur, they will be posted on this page. However, the core principle of “zero data collection, zero cookies” will remain unchanged.</p>
+                    <a href='https://mmovie.site/' target="_blank">Tap To Go Main Website</a>
+                </div>
+                <div class="footer-note">
+                    <i class="far fa-clock"></i> Last Updated: May 10, 2026 &nbsp;|&nbsp;
+                    <i class="fas fa-lock"></i> Absolutely no data collection, no cookies — total privacy.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Language switching logic: default Myanmar active
+    const btnMy = document.getElementById('btn-myanmar');
+    const btnEn = document.getElementById('btn-english');
+    const myanmarDiv = document.getElementById('myanmar-content');
+    const englishDiv = document.getElementById('english-content');
+
+    function setActiveLanguage(lang) {
+        if (lang === 'my') {
+            myanmarDiv.classList.add('active-lang');
+            englishDiv.classList.remove('active-lang');
+            btnMy.classList.add('active');
+            btnEn.classList.remove('active');
+            document.documentElement.lang = "my";
+            // small optional: update title?
+        } else if (lang === 'en') {
+            englishDiv.classList.add('active-lang');
+            myanmarDiv.classList.remove('active-lang');
+            btnEn.classList.add('active');
+            btnMy.classList.remove('active');
+            document.documentElement.lang = "en";
+        }
+    }
+
+    btnMy.addEventListener('click', () => setActiveLanguage('my'));
+    btnEn.addEventListener('click', () => setActiveLanguage('en'));
+
+    // default: Myanmar (already active from HTML, but ensure consistency)
+    // if somehow both visible? no, class active-lang only on myanmar.
+    // additionally, add localstorage memory optional? not needed but a nice touch? to keep user preference across refresh
+    // Let's implement simple persistent language choice (respect user experience, but still default is myanmar on first visit)
+    const savedLang = localStorage.getItem('privacy_lang_pref');
+    if (savedLang === 'en') {
+        setActiveLanguage('en');
+    } else if (savedLang === 'my') {
+        setActiveLanguage('my');
+    } else {
+        // default myanmar without explicit storage? we can store default my to keep consistency
+        // but first time set to my in localStorage optionally to remember later.
+        if(!localStorage.getItem('privacy_lang_pref')) {
+            localStorage.setItem('privacy_lang_pref', 'my');
+        }
+        setActiveLanguage('my');
+    }
+
+    // when user clicks, store preference
+    btnMy.addEventListener('click', () => {
+        localStorage.setItem('privacy_lang_pref', 'my');
+    });
+    btnEn.addEventListener('click', () => {
+        localStorage.setItem('privacy_lang_pref', 'en');
+    });
+</script>
+</body>
+</html>
